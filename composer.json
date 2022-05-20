@@ -1,0 +1,36 @@
+{
+    "name": "aw-studio/laravel-maillog",
+    "description": "Automatically log information about all outgoing mail in your Laravel application.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lukas Heller",
+            "email": "lukas@aw-studio.de"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^8.0",
+        "illuminate/contracts": "^8.0",
+        "illuminate/mail": "^8.0",
+        "illuminate/database": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AwStudio\\Maillog\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AwStudio\\Maillog\\MaillogServiceProvider"
+            ]
+        }
+    }
+}
