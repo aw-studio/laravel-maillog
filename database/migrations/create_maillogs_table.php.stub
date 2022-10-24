@@ -17,7 +17,6 @@ class CreateMailLogsTable extends Migration {
             $table->string('type')->nullable();
             $table->text('to')->nullable();
             $table->text('subject')->nullable();
-            $table->datetime('date')->nullable();
             $table->timestamps();
         });
     }
