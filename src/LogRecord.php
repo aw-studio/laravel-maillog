@@ -16,13 +16,6 @@ class LogRecord
     protected $type;
 
     /**
-     * The date the mail was sent.
-     *
-     * @var string
-     */
-    protected $date;
-
-    /**
      * The recipient(s) of the mail.
      *
      * @var string
@@ -36,24 +29,27 @@ class LogRecord
      */
     protected $subject;
 
-    public function __construct(\Swift_Message $message, string $logType = 'sent')
+    public function __construct($message, string $logType = 'sent')
     {
         $this->type = $logType;
 
         $this->subject = $message->getSubject();
 
-        $this->date = $message
-            ->getHeaders()
-            ->get('date')
-            ->getDateTime()
-            ->format('Y-m-d H:i:s');
-
-        $this->to = implode(
-            ',',
-            $message->getHeaders()
-                ->get('to')
-                ->getAddresses()
-        );
+        if ($message instanceof \Swift_Message) {
+            $this->to = implode(
+                ',',
+                $message->getHeaders()
+                    ->get('to')
+                    ->getAddresses()
+            );
+        } else {
+            $this->to = implode(
+                ',',
+                array_map(function (\Symfony\Component\Mime\Address $address) {
+                    return $address->getAddress();
+                }, $message->getHeaders()->get('to')->getAddresses())
+            );
+        }
     }
 
     /**
@@ -95,7 +91,6 @@ class LogRecord
                 'type'    => $this->type,
                 'to'      => $this->to,
                 'subject' => $this->subject,
-                'data'    => $this->date,
             ]);
         } catch (\Throwable $th) {
             Log::error('Unable to log to Database. Using fallback log to file. ', [
