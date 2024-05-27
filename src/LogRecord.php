@@ -88,8 +88,8 @@ class LogRecord
     {
         try {
             DatabaseLogRecord::create([
-                'type'    => $this->type,
-                'to'      => $this->to,
+                'type' => $this->type,
+                'to' => $this->to,
                 'subject' => $this->subject,
             ]);
         } catch (\Throwable $th) {
