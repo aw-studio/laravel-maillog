@@ -9,6 +9,10 @@ class LogSentMailListener
 {
     public function handle(MessageSent $event)
     {
-        (new LogRecord($event->message))->save();
+        if (! in_array('sent', config('maillog.logs'))) {
+            return;
+        }
+
+        (new LogRecord($event->message, 'sent'))->save();
     }
 }
