@@ -32,5 +32,16 @@
         "AwStudio\\Maillog\\MaillogServiceProvider"
       ]
     }
+  },
+  "require-dev": {
+    "pestphp/pest": "^2.34",
+    "orchestra/testbench": "^9.1",
+    "spatie/laravel-ray": "^1.36",
+    "laravel/pint": "^1.16"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
   }
 }

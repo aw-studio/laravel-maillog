@@ -16,7 +16,7 @@ class MaillogServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(EventServiceProvider::class);
-        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'maillog');
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'maillog');
     }
 
     /**
@@ -31,8 +31,8 @@ class MaillogServiceProvider extends ServiceProvider
                 'logging.channels.maillog',
                 [
                     'driver' => 'single',
-                    'path'   => storage_path('logs/maillog.log'),
-                    'level'  => 'info',
+                    'path' => storage_path('logs/maillog.log'),
+                    'level' => 'info',
                 ],
             );
         }
@@ -40,12 +40,12 @@ class MaillogServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             if (! class_exists('CreateMailLogsTable')) {
                 $this->publishes([
-                    __DIR__ . '/../database/migrations/create_maillogs_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_maillogs_table.php'),
+                    __DIR__.'/../database/migrations/create_maillogs_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_maillogs_table.php'),
                 ], 'migrations');
             }
 
             $this->publishes([
-                __DIR__ . '/../config/config.php' => config_path('maillog.php'),
+                __DIR__.'/../config/config.php' => config_path('maillog.php'),
             ], 'config');
         }
     }
