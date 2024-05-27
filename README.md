@@ -14,6 +14,7 @@ in the `storage/logs` folder.
 
 ## Configuration
 
+### Log to Database
 Additionally, if you want to log your outgoing mails to your database,
 you may do so with the following steps:
 
@@ -33,4 +34,13 @@ Update the `channels` config in `config/maillog.php`:
         // 'log',
         'database',
     ],
+```
+
+### Sending Event
+By default, this package is configured so that it only logs when mails have been `sent`. You can change the configuration so that `sending` is also logged. This generates very similar data records, but can be useful to be able to trace whether problems have occurred on the way and the dispatch has failed unexpectedly.
+```php
+'logs' => [
+    'sent',
+    'sending',
+],
 ```
